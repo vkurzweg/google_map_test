@@ -9,6 +9,7 @@ var searchBusinessResult = [];
 var currentTrip = {};
 var currentStopId = "";
 var currentActivity = "";
+var allTrips = [];
 
 function initMap() {
   var autocomplete_orgin = new google.maps.places.Autocomplete(document.getElementById('origin'));
@@ -169,61 +170,47 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
 // Function for Itinerary page map
 
-function initItineraryMap() {
-  var autocomplete_orgin = new google.maps.places.Autocomplete(document.getElementById('origin'));
-  var autocomplete_dest = new google.maps.places.Autocomplete(document.getElementById('dest'));
-  var directionsService = new google.maps.DirectionsService;
-  var directionsDisplay = new google.maps.DirectionsRenderer;
+// function initItineraryMap() {
+//   var autocomplete_orgin = new google.maps.places.Autocomplete(document.getElementById('origin'));
+//   var autocomplete_dest = new google.maps.places.Autocomplete(document.getElementById('dest'));
+//   var directionsService = new google.maps.DirectionsService;
+//   var directionsDisplay = new google.maps.DirectionsRenderer;
 
-  // var stopLocs = [];
-  // stopLocs.forEach(function(stops){
-  //   stopLocs.push({
-  //     lat: trip.stops.location.lat,
-  //     lng: trip.stops.location.lng
-  //   })
-  // })
+//   var markers = [];
+//   var markerId = 0;
+//   var currentItineraryStop = "";
 
-  map = new google.maps.Map(document.getElementById('itinerary-map'), {
-    center: {lat: (origin.getPosition().lat - destination.getPosition().lat) / 2 + origin.getPosition().lat),
-             lng: (origin.getPosition().lng - destination.getPosition().lng) / 2 + origin.getPosition().lng)}
-    scrollwheel: false,
-    zoom: 8
-  });
+//   $.get(`/trips/${currentItineraryTrip._id}/stops`, function(data){
+//         currentItineraryTrip = data;
+//         markers.forEach(function(marker, i){
+//           marker.stopId = data.stops[i]._id;
+//         })
+//         currentStopId = data._id;
+//         console.log(markers);
+//     })
 
-  $.ajax({
-        url: `/trips/${currentTrip._id}/stops`,
-        dataType: 'json',
-        method: "GET",
-        data: {
-          name: name,
-          location: {
-            lat: marker.getPosition().lat(),
-            lng: marker.getPosition().lng()
-          }
-        }
-      })
-      .done(function(data) {
-        currentTrip = data;
-        markers.forEach(function(marker, i){
-          marker.stopId = data.stops[i]._id;
-        })
-        currentStopId = data._id;
-        console.log(markers);
-    })
+//   map = new google.maps.Map(document.getElementById('itinerary-map'), {
+//     center: {lat: (origin.getPosition().lat - destination.getPosition().lat) / 2 + origin.getPosition().lat),
+//              lng: (origin.getPosition().lng - destination.getPosition().lng) / 2 + origin.getPosition().lng)}
+//     scrollwheel: false,
+//     zoom: 8
+//   });
 
 
 
-  directionsDisplay.setMap(map);
-
-  var stopMarker;
-  stopLocs.forEach(function(stops){
-    stopMarker = new google.maps.Marker({
-
-    })
-  })
 
 
-}
+//   directionsDisplay.setMap(map);
+
+//   var stopMarker;
+//   stopLocs.forEach(function(stops){
+//     stopMarker = new google.maps.Marker({
+
+//     })
+//   })
+
+
+// }
 
 //Import the select2 Library for select bar
 $(".js-example-basic-multiple").select2();
