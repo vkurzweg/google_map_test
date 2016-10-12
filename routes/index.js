@@ -17,11 +17,17 @@ router.get('/', function(req, res, next) {
 // get trips for a user
 router.get('/trips/:id', tripsCtrl.show)
 
+// Post activity route
+router.post('/stops/:stopId/activities', stopsCtrl.addActivity)
 
-router.post('/stops' , stopsCtrl.createStop)
+// Delete Activity route
+router.delete('/activities/:activityId', stopsCtrl.removeActivity)
+
+// Create Stop route
+router.post('/trips/:tripId/stops', stopsCtrl.createStop)
 
 // Delete Stop route
-router.delete('/stops/:id', stopsCtrl.removeStop)
+router.delete('/stops/:stopId', stopsCtrl.removeStop)
 
 // Trip Create Route
 router.post('/trips' , tripsCtrl.create)
@@ -30,8 +36,8 @@ router.post('/trips' , tripsCtrl.create)
 router.delete('/trips/:id',  tripsCtrl.delete)
 
 // Itnerary route
-// // router.get('/', function (req,res){
-// //   res.
+// router.get('/', function (req,res){
+//   res.
 // })
 
 // router.get('/itinerary', function(req,res){
