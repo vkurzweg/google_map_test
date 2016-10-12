@@ -164,6 +164,34 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     });
 }
 
+// Function for Itinerary page map
+
+// function initItineraryMap() {
+//   var autocomplete_orgin = new google.maps.places.Autocomplete(document.getElementById('origin'));
+//   var autocomplete_dest = new google.maps.places.Autocomplete(document.getElementById('dest'));
+//   var directionsService = new google.maps.DirectionsService;
+//   var directionsDisplay = new google.maps.DirectionsRenderer;
+
+//   var stopLocs = [];
+//   stopLocs.forEach(function(stops){
+//     stopLocs.push({
+//       lat: trip.stops.location.lat,
+//       lng: trip.stops.location.lng
+//     })
+//   })
+
+//   map = new google.maps.Map(document.getElementById('itinerary-map'), {
+//     center: {lat: (origin.getPosition().lat - destination.getPosition().lat) / 2 + origin.getPosition().lat),
+//              lng: (origin.getPosition().lng - destination.getPosition().lng) / 2 + origin.getPosition().lng)}
+//     scrollwheel: false,
+//     zoom: 8
+//   });
+
+//   directionsDisplay.setMap(map);
+
+
+// }
+
 //Import the select2 Library for select bar
 $(".js-example-basic-multiple").select2();
 
