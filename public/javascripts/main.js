@@ -9,7 +9,7 @@ var searchBusinessResult = [];
 var currentTrip = {};
 var currentStopId = "";
 var currentActivity = "";
-var allTrips = [];
+var currentBusType = "";
 
 function initMap() {
   var autocomplete_orgin = new google.maps.places.Autocomplete(document.getElementById('origin'));
@@ -168,50 +168,6 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     });
 }
 
-// Function for Itinerary page map
-
-// function initItineraryMap() {
-//   var autocomplete_orgin = new google.maps.places.Autocomplete(document.getElementById('origin'));
-//   var autocomplete_dest = new google.maps.places.Autocomplete(document.getElementById('dest'));
-//   var directionsService = new google.maps.DirectionsService;
-//   var directionsDisplay = new google.maps.DirectionsRenderer;
-
-//   var markers = [];
-//   var markerId = 0;
-//   var currentItineraryStop = "";
-
-//   $.get(`/trips/${currentItineraryTrip._id}/stops`, function(data){
-//         currentItineraryTrip = data;
-//         markers.forEach(function(marker, i){
-//           marker.stopId = data.stops[i]._id;
-//         })
-//         currentStopId = data._id;
-//         console.log(markers);
-//     })
-
-//   map = new google.maps.Map(document.getElementById('itinerary-map'), {
-//     center: {lat: (origin.getPosition().lat - destination.getPosition().lat) / 2 + origin.getPosition().lat),
-//              lng: (origin.getPosition().lng - destination.getPosition().lng) / 2 + origin.getPosition().lng)}
-//     scrollwheel: false,
-//     zoom: 8
-//   });
-
-
-
-
-
-//   directionsDisplay.setMap(map);
-
-//   var stopMarker;
-//   stopLocs.forEach(function(stops){
-//     stopMarker = new google.maps.Marker({
-
-//     })
-//   })
-
-
-// }
-
 //Import the select2 Library for select bar
 $(".js-example-basic-multiple").select2();
 
@@ -231,7 +187,7 @@ $("li > a.page-numbers").on('click', function(event) {
 //Function for searching business
 function searchBusiness (term) {
   // console.log(term);
-  console.log($("#price_selection").val().join());
+  // console.log($("#price_selection").val().join());
   $.ajax({
     url: '/yelp/search',
     dataType: 'json',
@@ -348,6 +304,13 @@ function renderRating (mediaNum, rating) {
 //Function for toggleing restaurant modal
 function reataurantToggle(){
   $('#restaurant_modal').modal('toggle')
+  currentBusType = "restaurant";
+}
+//Function for toggleing restaurant modal
+function shoppingToggle(){
+  $('#shopping_modal').modal('toggle')
+  currentBusType = "shopping";
+  searchBusiness('shopping')
 }
 //Function for toggleing confirm modal
 function confirmToggle(event){
@@ -362,7 +325,7 @@ function doAddAct(){
     dataType: 'json',
     method: "POST",
     data: {
-      businessType: "restaurant",
+      businessType: currentBusType,
       businessName: "business_name",
       businessId: currentActivity,
       lat: currentMark.lat,
@@ -373,6 +336,7 @@ function doAddAct(){
     currentTrip = data;
     $('#confirm_modal').modal('hide');
     $('#restaurant_modal').modal('hide');
+    $('#shopping_modal').modal('hide');
   })
 }
 
